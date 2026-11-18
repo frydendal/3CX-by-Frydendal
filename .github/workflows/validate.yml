@@ -20,7 +20,7 @@ jobs:
           php-version: '8.2'
       - name: Validate PHP syntax
         run: php -l mod_3cxbyfrydendal/mod_3cxbyfrydendal.php
-      - name: Validate XML and package layout
+      - name: Validate XML, Joomla update metadata and package layout
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -28,21 +28,36 @@ jobs:
           import xml.etree.ElementTree as ET
 
           root = Path(".")
-          ET.parse(root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml")
-          ET.parse(root / "update/mod_3cxbyfrydendal_update.xml")
-
           manifest = ET.parse(root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml").getroot()
+          updates = ET.parse(root / "update/mod_3cxbyfrydendal_update.xml").getroot()
+          update = updates.find("update")
+
+          assert manifest.tag == "extension", "Invalid extension manifest root"
+          assert manifest.attrib.get("type") == "module", "Manifest must declare a module"
+          assert manifest.attrib.get("client") == "site", "Manifest must declare the site client"
           assert manifest.findtext("version"), "Module version missing"
           assert manifest.find("files/filename") is not None, "Module entry file missing"
           assert manifest.find("updateservers/server") is not None, "Joomla update server missing"
 
+          assert update is not None, "Update definition missing"
+          assert update.findtext("element") == "mod_3cxbyfrydendal", "Update element mismatch"
+          assert update.findtext("type") == "module", "Update type must be module"
+          assert update.findtext("client") == "site", "Update feed must declare client=site"
+          assert update.findtext("version") == manifest.findtext("version"), "Update and install versions differ"
+
+          download = update.findtext("downloads/downloadurl")
+          expected = (
+              "https://github.com/frydendal/3CX-by-Frydendal/releases/download/"
+              f"v{manifest.findtext('version')}/mod_3cxbyfrydendal_v{manifest.findtext('version')}.zip"
+          )
+          assert download == expected, "Download URL does not match the versioned release asset"
+
           zip_files = list((root / "dist").glob("mod_3cxbyfrydendal_*.zip"))
-          if zip_files:
-              for package in zip_files:
-                  with zipfile.ZipFile(package) as zf:
-                      assert zf.testzip() is None, f"Corrupt ZIP: {package}"
-                      names = set(zf.namelist())
-                      assert "mod_3cxbyfrydendal.xml" in names, "Manifest must be at ZIP root"
-                      assert "mod_3cxbyfrydendal.php" in names, "Module PHP must be at ZIP root"
-          print("PHP, XML and package layout validated.")
+          for package in zip_files:
+              with zipfile.ZipFile(package) as zf:
+                  assert zf.testzip() is None, f"Corrupt ZIP: {package}"
+                  names = set(zf.namelist())
+                  assert "mod_3cxbyfrydendal.xml" in names, "Manifest must be at ZIP root"
+                  assert "mod_3cxbyfrydendal.php" in names, "Module PHP must be at ZIP root"
+          print("PHP, XML, Joomla update metadata and package layout validated.")
           PY
