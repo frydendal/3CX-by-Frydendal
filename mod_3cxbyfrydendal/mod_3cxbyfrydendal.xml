@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<extension type="module" client="site" method="upgrade">
+    <name>3CX by Frydendal</name>
+    <author>Frederik K. Frydendal</author>
+    <creationDate>November 2026</creationDate>
+    <copyright>Copyright (C) 2026 Frederik K. Frydendal</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>info@frdndl.dk</authorEmail>
+    <authorUrl>https://frydendal-oesten.dk</authorUrl>
+    <version>1.0.3</version>
+    <description>MOD_3CXBYFRYDENDAL_XML_DESCRIPTION</description>
+    <files>
+        <filename module="mod_3cxbyfrydendal">mod_3cxbyfrydendal.php</filename>
+    </files>
+    <languages folder="language">
+        <language tag="da-DK">da-DK/da-DK.mod_3cxbyfrydendal.ini</language>
+        <language tag="da-DK">da-DK/da-DK.mod_3cxbyfrydendal.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_3cxbyfrydendal.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_3cxbyfrydendal.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="MOD_3CXBYFRYDENDAL_FIELDSET_CONNECTION">
+                <field name="phonesystem_url" type="url" label="MOD_3CXBYFRYDENDAL_FIELD_PBX_URL" description="MOD_3CXBYFRYDENDAL_FIELD_PBX_URL_DESC" required="true" filter="url" default="" />
+                <field name="party" type="text" label="MOD_3CXBYFRYDENDAL_FIELD_PARTY" description="MOD_3CXBYFRYDENDAL_FIELD_PARTY_DESC" required="true" filter="string" maxlength="100" />
+            </fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" name="3CX by Frydendal">https://raw.githubusercontent.com/frydendal/3CX-by-Frydendal/main/update/mod_3cxbyfrydendal_update.xml</server>
+    </updateservers>
+</extension>
