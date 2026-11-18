@@ -4,7 +4,8 @@ Gratis og open source Joomla 6-modul, der integrerer den officielle 3CX Live Cha
 
 ## Status
 
-- Senest JED-godkendte, installerede og testede version: **1.0.4**
+- Senest JED-godkendte version: **1.0.4**
+- Næste vedligeholdelsesversion under test: **1.0.5**
 - Distribution: offentlig GitHub Release med versionsspecifik installationspakke
 - Udvikler: **FRDNDL by Frydendal**
 - Kontakt: [info@frdndl.dk](mailto:info@frdndl.dk)
@@ -26,15 +27,9 @@ Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det f
 - En aktiv 3CX Live Chat-konfiguration
 - HTTPS-adresse til 3CX Phone System og korrekt Party ID
 
-## Release candidate 1.0.5
+## Installation af senest JED-godkendte version
 
-Version 1.0.5 prepares the Joomla core update stream for a frontend/site module. The update definition explicitly declares `<client>site</client>`, as required for module update matching. The update feed and install manifest versions are kept in sync.
-
-Version 1.0.5 is a release candidate until its ZIP has been uploaded as the public GitHub Release asset and the Joomla 6 upgrade test from 1.0.4 has passed. Do not publish the update feed before the release asset is available.
-
-## Installation
-
-1. Hent [installationspakken til v1.0.4](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.4/mod_3cxbyfrydendal_v1.0.4.zip) fra GitHub Releases. Upload den verificerede fil `mod_3cxbyfrydendal_v1.0.4.zip` som release asset under tagget `v1.0.4`.
+1. Hent [installationspakken til v1.0.4](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.4/mod_3cxbyfrydendal_v1.0.4.zip).
 2. I Joomla: **System → Install → Extensions**.
 3. Upload ZIP-filen.
 4. Opret et modul af typen **3CX by Frydendal** under **Content → Site Modules**.
@@ -42,11 +37,11 @@ Version 1.0.5 is a release candidate until its ZIP has been uploaded as the publ
 6. Publicér modulet, vælg modulposition og menuvisning.
 7. Test på de sider, hvor modulet skal vises.
 
-## Opdateringer i Joomla
+## Joomla Core Update System
 
 Joomla-opdateringsmanifestet ligger i `update/mod_3cxbyfrydendal_update.xml`.
 
-Når v1.0.4 er udgivet, skal modulmanifestet indeholde denne update-server:
+Installationsmanifestet registrerer opdateringsserveren:
 
 ```xml
 <updateservers>
@@ -54,15 +49,19 @@ Når v1.0.4 er udgivet, skal modulmanifestet indeholde denne update-server:
 </updateservers>
 ```
 
-Opdateringsmanifestet skal pege på en ZIP-fil, der er vedhæftet en offentlig GitHub Release. Brug en versionsspecifik release-URL; brug ikke en ZIP fra en flytbar branch som permanent produktions-download.
+Opdateringsfeedet identificerer modulet med elementet `mod_3cxbyfrydendal`, typen `module` og klienten `site`. Feedets version og downloadadresse skal altid stemme overens med en eksisterende, offentlig GitHub Release.
 
-**Overgang fra 1.0.3:** Den installerede 1.0.3 peger fortsat på den hidtidige update-server. For automatisk overgang skal den gamle update-server midlertidigt annoncere 1.0.4 med GitHub-releasepakken. Efter installation af 1.0.4 bruger fremtidige opdateringer GitHub-manifestet.
+## v1.0.5 – vedligeholdelsesrelease under test
+
+Version 1.0.5 indeholder en eksplicit `<client>site</client>`-angivelse i update-definitionen og udvidede automatiske valideringer af update-metadata.
+
+**Status:** Ikke JED-godkendt og ikke offentliggjort som produktionsrelease. Den må først annonceres i produktionsfeedet, når ZIP-asset er publiceret og den automatiske opdatering fra 1.0.4 er bestået på Joomla 6.
 
 ## Repositorystruktur
 
 - `mod_3cxbyfrydendal/` – Joomla-installationsfiler
 - `update/` – Joomla update-XML
-- `dist/` – lokalt genererede installationspakker (ikke source-of-truth)
+- `dist/` – lokalt genererede installationspakker
 - `docs/` – installations- og konfigurationsvejledning
 - `.github/workflows/` – automatiseret validering af kildekode og XML
 
