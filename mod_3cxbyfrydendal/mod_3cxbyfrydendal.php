@@ -2,7 +2,7 @@
 /**
  * @package     Joomla.Site
  * @subpackage  mod_3cxbyfrydendal
- * @copyright   Copyright (C) 2026 FRDNDL by Frydendal
+ * Copyright (C) 2026 FRDNDL by Frydendal
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,23 +16,20 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Language\Text;
+use Joomla\\CMS\\Factory;
+use Joomla\\CMS\\Language\\Text;
 
 $pbxUrl = trim((string) $params->get('phonesystem_url', ''));
 $party  = trim((string) $params->get('party', ''));
 
-// Accept only an HTTPS origin. Credentials, paths, query strings and fragments
-// are deliberately rejected so the provider receives a predictable host URL.
+// Accept only an HTTPS host URL. Credentials and URL fragments are not valid PBX endpoints.
 $parsedPbx = $pbxUrl !== '' ? parse_url($pbxUrl) : false;
 $isValidPbx = is_array($parsedPbx)
     && isset($parsedPbx['scheme'], $parsedPbx['host'])
     && strtolower($parsedPbx['scheme']) === 'https'
     && !isset($parsedPbx['user'])
     && !isset($parsedPbx['pass'])
-    && !isset($parsedPbx['query'])
     && !isset($parsedPbx['fragment'])
-    && (!isset($parsedPbx['path']) || $parsedPbx['path'] === '' || $parsedPbx['path'] === '/')
     && preg_match('/^[A-Za-z0-9.-]+$/', $parsedPbx['host']);
 
 if (!$isValidPbx || $party === '') {
@@ -41,19 +38,22 @@ if (!$isValidPbx || $party === '') {
             . htmlspecialchars(Text::_('MOD_3CXBYFRYDENDAL_MISSING_CONFIG'), ENT_QUOTES, 'UTF-8')
             . '</div>';
     }
-
     return;
 }
 
 $pbxUrl = rtrim($pbxUrl, '/');
 
-// Use the official 3CX selector and script, matching the verified 1.0.3 module
-// implementation. Joomla's document API handles script registration.
+// Use the official 3CX integration exactly as in the working vendor snippet.
+// Joomla's document API places the deferred script in the page head.
 $document = Factory::getApplication()->getDocument();
 $document->addScript(
     'https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js',
     [],
-    ['defer' => true, 'id' => 'tcx-callus-js', 'charset' => 'utf-8']
+    [
+        'defer' => true,
+        'id' => 'tcx-callus-js',
+        'charset' => 'utf-8',
+    ]
 );
 ?>
 <call-us-selector
