@@ -28,7 +28,7 @@ Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det f
 
 ## Installation
 
-1. Hent installations-ZIP-filen fra [GitHub Releases](https://github.com/frydendal/3CX-by-Frydendal/releases), når en release er publiceret.
+1. Hent installations-ZIP-filen fra [GitHub Releases](https://github.com/frydendal/3CX-by-Frydendal/releases), når v1.0.4 er publiceret. Upload den verificerede fil `mod_3cxbyfrydendal_v1.0.4.zip` som release asset under tagget `v1.0.4`.
 2. I Joomla: **System → Install → Extensions**.
 3. Upload ZIP-filen.
 4. Opret et modul af typen **3CX by Frydendal** under **Content → Site Modules**.
@@ -58,7 +58,7 @@ Opdateringsmanifestet skal pege på en ZIP-fil, der er vedhæftet en offentlig G
 - `update/` – Joomla update-XML
 - `dist/` – lokalt genererede installationspakker (ikke source-of-truth)
 - `docs/` – installations- og konfigurationsvejledning
-- `.github/workflows/` – automatiseret validering og release-builds
+- `.github/workflows/` – automatiseret validering af kildekode og XML
 
 ## Udvikling og bidrag
 
