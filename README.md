@@ -26,6 +26,12 @@ Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det f
 - En aktiv 3CX Live Chat-konfiguration
 - HTTPS-adresse til 3CX Phone System og korrekt Party ID
 
+## Release candidate 1.0.5
+
+Version 1.0.5 prepares the Joomla core update stream for a frontend/site module. The update definition explicitly declares `<client>site</client>`, as required for module update matching. The update feed and install manifest versions are kept in sync.
+
+Version 1.0.5 is a release candidate until its ZIP has been uploaded as the public GitHub Release asset and the Joomla 6 upgrade test from 1.0.4 has passed. Do not publish the update feed before the release asset is available.
+
 ## Installation
 
 1. Hent [installationspakken til v1.0.4](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.4/mod_3cxbyfrydendal_v1.0.4.zip) fra GitHub Releases. Upload den verificerede fil `mod_3cxbyfrydendal_v1.0.4.zip` som release asset under tagget `v1.0.4`.
