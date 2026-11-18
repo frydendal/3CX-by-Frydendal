@@ -4,8 +4,8 @@ Gratis og open source Joomla 6-modul, der integrerer den officielle 3CX Live Cha
 
 ## Status
 
-- Senest JED-godkendte og brugerafprøvede version: **1.0.3**
-- Næste klargjorte release: **1.0.4** (GitHub-distribution; afventer publiceret installationspakke og test)
+- Senest JED-godkendte, installerede og testede version: **1.0.4**
+- Distribution: offentlig GitHub Release med versionsspecifik installationspakke
 - Udvikler: **FRDNDL by Frydendal**
 - Kontakt: [info@frdndl.dk](mailto:info@frdndl.dk)
 - Licens: GNU General Public License v2 eller nyere
@@ -28,7 +28,7 @@ Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det f
 
 ## Installation
 
-1. Hent installations-ZIP-filen fra [GitHub Releases](https://github.com/frydendal/3CX-by-Frydendal/releases), når v1.0.4 er publiceret. Upload den verificerede fil `mod_3cxbyfrydendal_v1.0.4.zip` som release asset under tagget `v1.0.4`.
+1. Hent [installationspakken til v1.0.4](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.4/mod_3cxbyfrydendal_v1.0.4.zip) fra GitHub Releases. Upload den verificerede fil `mod_3cxbyfrydendal_v1.0.4.zip` som release asset under tagget `v1.0.4`.
 2. I Joomla: **System → Install → Extensions**.
 3. Upload ZIP-filen.
 4. Opret et modul af typen **3CX by Frydendal** under **Content → Site Modules**.
