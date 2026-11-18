@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>info@frdndl.dk</authorEmail>
     <authorUrl>https://frydendal-oesten.dk</authorUrl>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>MOD_3CXBYFRYDENDAL_XML_DESCRIPTION</description>
     <files>
         <filename module="mod_3cxbyfrydendal">mod_3cxbyfrydendal.php</filename>
