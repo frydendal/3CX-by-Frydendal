@@ -5,7 +5,7 @@ Gratis og open source Joomla 6-modul, der integrerer den officielle 3CX Live Cha
 ## Status
 
 - Seneste offentlige release: **1.0.5**
-- JED-godkendt release: **1.0.4**
+- Første JED-godkendte release: **1.0.4**
 - Udvikler: **FRDNDL by Frydendal**
 - Kontakt: [info@frdndl.dk](mailto:info@frdndl.dk)
 - Licens: GNU General Public License v2 eller nyere
@@ -52,7 +52,7 @@ Opdateringsfeedet identificerer modulet med elementet `mod_3cxbyfrydendal`, type
 
 ## Versionshistorik
 
-- **1.0.5** – Seneste offentlige release. Indeholder eksplicit `<client>site</client>` i opdateringsdefinitionen samt udvidet CI-validering af Joomla-update-metadata.
+- **1.0.5** – Seneste stabile release. Indeholder eksplicit `<client>site</client>` i opdateringsdefinitionen samt udvidet CI-validering af Joomla-update-metadata.
 - **1.0.4** – Første JED-godkendte release.
 
 ## Repositorystruktur
