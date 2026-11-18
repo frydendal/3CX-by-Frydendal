@@ -16,8 +16,8 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\\CMS\\Factory;
-use Joomla\\CMS\\Language\\Text;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 
 $pbxUrl = trim((string) $params->get('phonesystem_url', ''));
 $party  = trim((string) $params->get('party', ''));
