@@ -4,9 +4,8 @@ Gratis og open source Joomla 6-modul, der integrerer den officielle 3CX Live Cha
 
 ## Status
 
-- Senest JED-godkendte version: **1.0.4**
-- Næste vedligeholdelsesversion under test: **1.0.5**
-- Distribution: offentlig GitHub Release med versionsspecifik installationspakke
+- Seneste offentlige release: **1.0.5**
+- JED-godkendt release: **1.0.4**
 - Udvikler: **FRDNDL by Frydendal**
 - Kontakt: [info@frdndl.dk](mailto:info@frdndl.dk)
 - Licens: GNU General Public License v2 eller nyere
@@ -18,7 +17,7 @@ Modulet indsætter 3CX' officielle Live Chat-integration på Joomla-sitet med de
 1. **3CX Phone System URL** – HTTPS-adressen til 3CX-systemet.
 2. **3CX Party ID** – Party-identifikatoren fra Live Chat-konfigurationen.
 
-Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det forsøger ikke at implementere en alternativ chatklient.
+Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det implementerer ikke en alternativ chatklient.
 
 ## Krav
 
@@ -27,9 +26,9 @@ Modulet bruger 3CX' officielle selector-element og eksterne widget-script. Det f
 - En aktiv 3CX Live Chat-konfiguration
 - HTTPS-adresse til 3CX Phone System og korrekt Party ID
 
-## Installation af senest JED-godkendte version
+## Installation
 
-1. Hent [installationspakken til v1.0.4](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.4/mod_3cxbyfrydendal_v1.0.4.zip).
+1. Hent [installationspakken til v1.0.5](https://github.com/frydendal/3CX-by-Frydendal/releases/download/v1.0.5/mod_3cxbyfrydendal_v1.0.5.zip).
 2. I Joomla: **System → Install → Extensions**.
 3. Upload ZIP-filen.
 4. Opret et modul af typen **3CX by Frydendal** under **Content → Site Modules**.
@@ -51,11 +50,10 @@ Installationsmanifestet registrerer opdateringsserveren:
 
 Opdateringsfeedet identificerer modulet med elementet `mod_3cxbyfrydendal`, typen `module` og klienten `site`. Feedets version og downloadadresse skal altid stemme overens med en eksisterende, offentlig GitHub Release.
 
-## v1.0.5 – vedligeholdelsesrelease under test
+## Versionshistorik
 
-Version 1.0.5 indeholder en eksplicit `<client>site</client>`-angivelse i update-definitionen og udvidede automatiske valideringer af update-metadata.
-
-**Status:** Ikke JED-godkendt og ikke offentliggjort som produktionsrelease. Den må først annonceres i produktionsfeedet, når ZIP-asset er publiceret og den automatiske opdatering fra 1.0.4 er bestået på Joomla 6.
+- **1.0.5** – Seneste offentlige release. Indeholder eksplicit `<client>site</client>` i opdateringsdefinitionen samt udvidet CI-validering af Joomla-update-metadata.
+- **1.0.4** – Første JED-godkendte release.
 
 ## Repositorystruktur
 
