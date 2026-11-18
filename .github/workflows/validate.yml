@@ -1,0 +1,48 @@
+name: Validate Joomla module
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Validate PHP syntax
+        run: php -l mod_3cxbyfrydendal/mod_3cxbyfrydendal.php
+      - name: Validate XML and package layout
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          import xml.etree.ElementTree as ET
+
+          root = Path(".")
+          ET.parse(root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml")
+          ET.parse(root / "update/mod_3cxbyfrydendal_update.xml")
+
+          manifest = ET.parse(root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml").getroot()
+          assert manifest.findtext("version"), "Module version missing"
+          assert manifest.find("files/filename") is not None, "Module entry file missing"
+          assert manifest.find("updateservers/server") is not None, "Joomla update server missing"
+
+          zip_files = list((root / "dist").glob("mod_3cxbyfrydendal_*.zip"))
+          if zip_files:
+              for package in zip_files:
+                  with zipfile.ZipFile(package) as zf:
+                      assert zf.testzip() is None, f"Corrupt ZIP: {package}"
+                      names = set(zf.namelist())
+                      assert "mod_3cxbyfrydendal.xml" in names, "Manifest must be at ZIP root"
+                      assert "mod_3cxbyfrydendal.php" in names, "Module PHP must be at ZIP root"
+          print("PHP, XML and package layout validated.")
+          PY
