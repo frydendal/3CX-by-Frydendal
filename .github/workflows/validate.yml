@@ -2,7 +2,7 @@ name: Validate Joomla module
 
 on:
   push:
-    branches: [main]
+    branches: [main, release/v1.0.5]
   pull_request:
     branches: [main]
 
@@ -28,14 +28,18 @@ jobs:
           import xml.etree.ElementTree as ET
 
           root = Path(".")
-          manifest = ET.parse(root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml").getroot()
-          updates = ET.parse(root / "update/mod_3cxbyfrydendal_update.xml").getroot()
+          manifest_path = root / "mod_3cxbyfrydendal/mod_3cxbyfrydendal.xml"
+          update_path = root / "update/mod_3cxbyfrydendal_update.xml"
+
+          manifest = ET.parse(manifest_path).getroot()
+          updates = ET.parse(update_path).getroot()
           update = updates.find("update")
 
           assert manifest.tag == "extension", "Invalid extension manifest root"
           assert manifest.attrib.get("type") == "module", "Manifest must declare a module"
           assert manifest.attrib.get("client") == "site", "Manifest must declare the site client"
-          assert manifest.findtext("version"), "Module version missing"
+          version = manifest.findtext("version")
+          assert version, "Module version missing"
           assert manifest.find("files/filename") is not None, "Module entry file missing"
           assert manifest.find("updateservers/server") is not None, "Joomla update server missing"
 
@@ -43,12 +47,12 @@ jobs:
           assert update.findtext("element") == "mod_3cxbyfrydendal", "Update element mismatch"
           assert update.findtext("type") == "module", "Update type must be module"
           assert update.findtext("client") == "site", "Update feed must declare client=site"
-          assert update.findtext("version") == manifest.findtext("version"), "Update and install versions differ"
+          assert update.findtext("version") == version, "Update and install versions differ"
 
           download = update.findtext("downloads/downloadurl")
           expected = (
               "https://github.com/frydendal/3CX-by-Frydendal/releases/download/"
-              f"v{manifest.findtext('version')}/mod_3cxbyfrydendal_v{manifest.findtext('version')}.zip"
+              f"v{version}/mod_3cxbyfrydendal_v{version}.zip"
           )
           assert download == expected, "Download URL does not match the versioned release asset"
 
